@@ -1,0 +1,1 @@
+// for loading and displaying trend visuals
