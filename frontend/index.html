@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Fashion Trend Analyzer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <h1>Fashion Trend Analyzer</h1>
 
+  <div class="chart-container">
+    <div>
+      <h2>K-Means Clustering</h2>
+      <canvas id="kmeansChart" width="400" height="300"></canvas>
+    </div>
+    <div>
+      <h2>DBSCAN Clustering</h2>
+      <canvas id="dbscanChart" width="400" height="300"></canvas>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
