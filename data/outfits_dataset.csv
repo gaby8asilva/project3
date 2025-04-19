@@ -1,1 +1,24 @@
-# randomly generated dataset (100,000 outfits)
+
+import pandas as pd
+import numpy as np
+
+
+num_samples = 100000
+
+
+data = {
+    'Color_Tag': np.random.choice(['Red', 'Blue', 'Green', 'Black', 'White'], num_samples),
+    'Item1_Tag': np.random.choice(['Shirt', 'Pants', 'Jacket', 'Shoes'], num_samples),
+    'Season_Tag': np.random.choice(['Summer', 'Winter', 'Fall', 'Spring'], num_samples),
+    'Popularity': np.random.rand(num_samples)  # Random popularity score between 0 and 1
+}
+
+
+df = pd.DataFrame(data)
+
+
+df.to_csv('../../data/outfits_dataset.csv', index=False)
+
+
+print("Generated dataset sample:")
+print(df.head())
