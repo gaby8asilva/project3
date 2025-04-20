@@ -2,13 +2,13 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import DBSCAN
 
-# Path to the dataset
+# Path to the random dataset
 train_file = '../../data/outfits_dataset.csv'
 
-# Load the dataset and skip # lines
+# Load the dataset and skip the # lines
 df = pd.read_csv(train_file, comment='#')
 
-# Display the first few rows to check if the data is loaded correctly
+# Display the first few rows to check if the data is loaded properly
 print("Dataset Sample:")
 print(df.head())
 
@@ -18,14 +18,14 @@ print("Dataset Columns:", df.columns)
 # Select the relevant columns for clustering
 X = df[['Color_Tag', 'Item1_Tag', 'Style_Tag', 'Season_Tag', 'Popularity']]
 
-# Encode to numeric
+# Encode columns to numeric
 X_encoded = pd.get_dummies(X, drop_first=True)  # Converts categorical columns to numerical values
 
-# Standardize the data (important for DBSCAN)
+# Standardize the data for DBSCAN
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_encoded)
 
-# Apply DBSCAN with adjusted parameters
+# Apply DBSCAN with parameters
 dbscan = DBSCAN(eps=5.0, min_samples=10)
 dbscan.fit(X_scaled)
 
