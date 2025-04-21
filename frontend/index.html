@@ -1,25 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Fashion Trend Analyzer</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
   <h1>Fashion Trend Analyzer</h1>
 
-  <div class="chart-container">
-    <div>
-      <h2>K-Means Clustering</h2>
-      <canvas id="kmeansChart" width="400" height="300"></canvas>
+  <div class="chart-row">
+    <div class="chart-block">
+      <h2>K-Means: Cluster Sizes</h2>
+      <canvas id="kmeansChart" width="500" height="200"></canvas>
     </div>
-    <div>
-      <h2>DBSCAN Clustering</h2>
-      <canvas id="dbscanChart" width="400" height="300"></canvas>
+    <div class="chart-block">
+      <h2>DBSCAN: Cluster Sizes</h2>
+      <canvas id="dbscanChart" width="500" height="200"></canvas>
     </div>
   </div>
 
+  <hr />
+
+  <!-- Style Breakdown -->
+  <div class="chart-block">
+    <h2>Style Tag Distribution (K-Means)</h2>
+    <canvas id="styleBreakdownChart" width="500" height="200"></canvas>
+  </div>
+
+  <!-- Season Breakdown -->
+  <div class="chart-block">
+    <h2>Season Breakdown (K-Means)</h2>
+    <canvas id="seasonBreakdownChart" width="500" height="200"></canvas>
+  </div>
+
+  <!-- Color Breakdown -->
+  <div class="chart-block">
+    <h2>Color Breakdown (K-Means)</h2>
+    <canvas id="colorBreakdownChart" width="500" height="200"></canvas>
+  </div>
+
   <script src="scripts.js"></script>
+
 </body>
 </html>

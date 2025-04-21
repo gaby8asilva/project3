@@ -1,14 +1,23 @@
 body {
   font-family: Arial, sans-serif;
+  background: #fff;
+  margin: 20px;
   text-align: center;
-  background-color: 'white';
-  padding: 20px;
 }
 
-.chart-container {
+h1 {
+  margin-bottom: 40px;
+}
+
+.chart-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 50px;
   flex-wrap: wrap;
-  gap: 40px;
-  margin-top: 40px;
+}
+
+.chart-block {
+  margin: 40px auto;
+  width: 600px;
+  max-width: 95%;
 }
