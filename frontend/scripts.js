@@ -1,11 +1,12 @@
 // for loading and displaying trend visuals
 
-// temporary kmeans cluster data
-const kmeansResults = [
-  { label: "Cluster #1", value: 123 },
-  { label: "Cluster #2", value: 234 },
-  { label: "Cluster #3", value: 345 }
-];
+// kmeans cluster data using results from kmeans_results.json
+ const kmeansResults = [
+   { label: "Cluster 1", value: 49831 },
+   { label: "Cluster 2", value: 25030 },
+   { label: "Cluster 3", value: 25139 }
+ ];
+
 
 // temporary dbscan cluster data
 const dbscanResults = [
@@ -27,6 +28,13 @@ function drawChart(chartId, data, title) {
           beginAtZero: true, title: { display: true, text: 'Outfit Count' } } } } });
 }
 
-// call the chart
 drawChart('kmeansChart', kmeansResults, 'Distribution');
+
+
+// fetch("../../kmeans_results.json")
+//   .then(response => response.json())
+//   .then(data => {
+//     drawChart("kmeansChart", data, "K-Means: Cluster Sizes");
+//   });
+
 drawChart('dbscanChart', dbscanResults, 'Distribution');
