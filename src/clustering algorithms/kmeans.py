@@ -1,5 +1,7 @@
 import math
 import random
+import json
+import pandas
 
 def initialize_centroids(data_points, number_of_clusters):
     return random.sample(data_points, number_of_clusters)
@@ -60,3 +62,25 @@ def kmeans(data_points, number_of_clusters, maximum_iterations=100):
                 closest_centroid_index = centroid_index
         labels.append(closest_centroid_index)
     return labels
+
+# loading and making the categories numerical
+outfit_data = pandas.read_csv("../../data/outfits_dataset.csv")
+features = pandas.get_dummies(outfit_data[['Color_Tag', 'Item1_Tag', 'Style_Tag', 'Season_Tag']])
+data_points = features.to_numpy().tolist()
+
+# 3 clusters
+cluster_labels = kmeans(data_points, number_of_clusters=3)
+
+cluster_counts = {}
+for label in cluster_labels:
+    cluster_name = f"Cluster {label + 1}"
+    cluster_counts[cluster_name] = cluster_counts.get(cluster_name, 0) + 1
+
+
+output = [{"label": cluster, "value": count} for cluster, count in sorted(cluster_counts.items())] # frontend purposes
+
+
+with open("../../frontend/kmeans_results.json", "w") as file:
+    json.dump(output, file)
+
+print("K-Means results saved")
