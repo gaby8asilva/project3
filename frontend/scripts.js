@@ -39,13 +39,52 @@ const colorBreakdownByCluster = {
 };
 
 
-// temporary dbscan cluster data
+// dbscan cluster data using results from dbscan_results.json
 const dbscanResults = [
-  { label: "Cluster #1", value: 100 },
-  { label: "Cluster #2", value: 215 },
-  { label: "Cluster #3", value: 330 },
-  { label: "Cluster #4", value: 445 },
+  { label: "Cluster 1", value: 65 },
+  { label: "Cluster 2", value: 64 },
+  { label: "Cluster 3", value: 68 },
+  { label: "Cluster 4", value: 60 },
+  { label: "Cluster 5", value: 60 },
+  { label: "Cluster 6", value: 60 },
+  { label: "Cluster 7", value: 61 },
+  { label: "Cluster 8", value: 60 },
+  { label: "Noise",     value: 99502 }
 ];
+
+// dbscan breakdown data results from style_breakdown_dbscan.json
+const styleBreakdownByClusterDBSCAN = {
+  "boho chic":    [0, 0, 0, 0, 0, 0, 0, 0, 11188],
+  "clean girl":   [0, 0, 0, 0, 0, 0, 0, 0, 11037],
+  "coquette":     [65, 0, 0, 0, 0, 0, 0, 0, 11065],
+  "cottage core": [0, 64, 0, 0, 60, 0, 0, 0, 10976],
+  "grunge":       [0, 0, 0, 0, 0, 0, 0, 0, 11044],
+  "minimalist":   [0, 0, 68, 0, 0, 0, 0, 0, 10944],
+  "old money":    [0, 0, 0, 0, 0, 0, 0, 60, 11043],
+  "streetwear":   [0, 0, 0, 60, 0, 60, 61, 0, 11085],
+  "y2k":          [0, 0, 0, 0, 0, 0, 0, 0, 11120]
+};
+
+// dbscan breakdown data results from season_breakdown_dbscan.json
+const seasonBreakdownByClusterDBSCAN = {
+  "Fall":   [0, 0, 68, 0, 0, 0, 0, 0, 24962],
+  "Spring": [0, 0, 0, 60, 0, 60, 0, 60, 24877],
+  "Summer": [65, 0, 0, 0, 0, 0, 61, 0, 24648],
+  "Winter": [0, 64, 0, 0, 60, 0, 0, 0, 25015]
+};
+
+// dbscan breakdown data results from color_breakdown_dbscan.json
+const colorBreakdownByClusterDBSCAN = {
+  "bright":      [0, 0, 0, 0, 0, 60, 0, 0, 16701],
+  "metallics":   [65, 0, 0, 0, 0, 0, 0, 0, 16656],
+  "monochrome":  [0, 0, 0, 60, 0, 0, 0, 60, 16608],
+  "neutrals":    [0, 0, 0, 0, 60, 0, 61, 0, 16484],
+  "pastels":     [0, 64, 68, 0, 0, 0, 0, 0, 16426],
+  "patterns":    [0, 0, 0, 0, 0, 0, 0, 0, 16627]
+};
+
+
+
 
 // draws chart
 function drawChart(chartId, data, title) {
@@ -175,3 +214,42 @@ drawChart('kmeansChart', kmeansResults, 'Distribution');
 
 
 drawChart('dbscanChart', dbscanResults, 'Distribution');
+
+// draw dbscan brokendown
+const clusterLabelsDBSCAN = dbscanResults.map(c => c.label);
+const styleTagsDBSCAN = Object.keys(styleBreakdownByClusterDBSCAN);
+const styleDatasetsDBSCAN = styleTagsDBSCAN.map((style, index) => ({
+  label: style,
+  data: styleBreakdownByClusterDBSCAN[style],
+  backgroundColor: `hsl(${index * 35}, 70%, 60%)`
+}));
+new Chart(document.getElementById("styleBreakdownChartDBSCAN").getContext("2d"), {
+  type: "bar",
+  data: { labels: clusterLabelsDBSCAN, datasets: styleDatasetsDBSCAN },
+  options: { responsive: true, plugins: { title: { display: true, text: "Style Tag Distribution (DBSCAN)" } }, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } }
+});
+
+const seasonTagsDBSCAN = Object.keys(seasonBreakdownByClusterDBSCAN);
+const seasonDatasetsDBSCAN = seasonTagsDBSCAN.map((season, index) => ({
+  label: season,
+  data: seasonBreakdownByClusterDBSCAN[season],
+  backgroundColor: `hsl(${index * 90}, 65%, 65%)`
+}));
+new Chart(document.getElementById("seasonBreakdownChartDBSCAN").getContext("2d"), {
+  type: "bar",
+  data: { labels: clusterLabelsDBSCAN, datasets: seasonDatasetsDBSCAN },
+  options: { responsive: true, plugins: { title: { display: true, text: "Season Tag Distribution (DBSCAN)" } }, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } }
+});
+
+const colorTagsDBSCAN = Object.keys(colorBreakdownByClusterDBSCAN);
+const colorDatasetsDBSCAN = colorTagsDBSCAN.map((color, index) => ({
+  label: color,
+  data: colorBreakdownByClusterDBSCAN[color],
+  backgroundColor: `hsl(${index * 60}, 75%, 55%)`
+}));
+new Chart(document.getElementById("colorBreakdownChartDBSCAN").getContext("2d"), {
+  type: "bar",
+  data: { labels: clusterLabelsDBSCAN, datasets: colorDatasetsDBSCAN },
+  options: { responsive: true, plugins: { title: { display: true, text: "Color Tag Distribution (DBSCAN)" } }, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } }
+});
+
