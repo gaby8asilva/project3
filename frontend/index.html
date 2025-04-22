@@ -5,62 +5,106 @@
   <title>Fashion Trend Analyzer</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
 </head>
+
+
 <body>
 
   <h1>Fashion Trend Analyzer</h1>
+  <p><strong>Dataset:</strong> <a href="../../data/outfits_dataset.csv" download target="_blank">Click to view outfits_dataset.csv (100,000+ entries)</a></p>
 
+  <h2>Clustering Results</h2>
   <div class="chart-row">
     <div class="chart-block">
-      <h2>K-Means: Cluster Sizes</h2>
+      <h3>K-Means Cluster Results</h3>
       <canvas id="kmeansChart" width="500" height="200"></canvas>
     </div>
     <div class="chart-block">
-      <h2>DBSCAN: Cluster Sizes</h2>
+      <h2>DBSCAN Cluster Results</h2>
       <canvas id="dbscanChart" width="500" height="200"></canvas>
     </div>
   </div>
 
   <hr />
 
-  <!-- style breakdown kmeans -->
-  <div class="chart-block">
-    <h2>Style Tag Distribution (K-Means)</h2>
-    <canvas id="styleBreakdownChart" width="500" height="200"></canvas>
+  <h2>K-Means Cluster Breakdown</h2>
+
+  <div class="breakdown-row">
+    <div>
+    <!-- style breakdown kmeans -->
+    <details>
+      <summary>Distribution Breakdown by Style</summary>
+      <canvas id="styleBreakdownChart" width="500" height="200"></canvas>
+    </details>
+    </div>
+    <div>
+    <!-- season breakdown kmeans-->
+    <details>
+      <summary>Distribution Breakdown by Season</summary>
+      <canvas id="seasonBreakdownChart" width="500" height="200"></canvas>
+    </details>
+    </div>
+    <div>
+    <!-- color breakdown kmeans -->
+    <details>
+      <summary>Distribution Breakdown by Color</summary>
+      <canvas id="colorBreakdownChart" width="500" height="200"></canvas>
+    </details>
+    </div>
+  </div>
+  <hr />
+
+  <h2>DBSCAN Breakdown</h2>
+
+  <div class="breakdown-row">
+    <!-- style breakdown dbscan -->
+    <div>
+    <details>
+      <summary>Distribution Breakdown by Style</summary>
+      <canvas id="styleBreakdownChartDBSCAN" width="500" height="200"></canvas>
+    </details>
+    </div>
+    <div>
+    <!-- season breakdown dbscan-->
+    <details>
+      <summary>Distribution Breakdown by Season</summary>
+      <canvas id="seasonBreakdownChartDBSCAN" width="500" height="200"></canvas>
+    </details>
+    </div>
+    <div>
+    <!-- color breakdown dbscan -->
+    <details>
+      <summary>Distribution Breakdown by Color</summary>
+      <canvas id="colorBreakdownChartDBSCAN" width="500" height="200"></canvas>
+    </details>
+    </div>
   </div>
 
-  <!-- season breakdown kmeans-->
-  <div class="chart-block">
-    <h2>Season Breakdown (K-Means)</h2>
-    <canvas id="seasonBreakdownChart" width="500" height="200"></canvas>
+  <div class="center">
+    <button id="toggleBreakdownsBtn" onclick="toggleBreakdowns()">
+      Show All Breakdowns
+    </button>
   </div>
 
-  <!-- color breakdown kmeans -->
-  <div class="chart-block">
-    <h2>Color Breakdown (K-Means)</h2>
-    <canvas id="colorBreakdownChart" width="500" height="200"></canvas>
-  </div>
-
-
-  <!-- style breakdown dbscan -->
-  <div class="chart-block">
-    <h2>Style Tag Distribution DBSCAN</h2>
-    <canvas id="styleBreakdownChartDBSCAN" width="500" height="200"></canvas>
-  </div>
-
-  <!-- season breakdown dbscan-->
-  <div class="chart-block">
-    <h2>Season Breakdown DBSCAN</h2>
-    <canvas id="seasonBreakdownChartDBSCAN" width="500" height="200"></canvas>
-  </div>
-
-  <!-- color breakdown dbscan -->
-  <div class="chart-block">
-    <h2>Color Breakdown DBSCAN</h2>
-    <canvas id="colorBreakdownChartDBSCAN" width="500" height="200"></canvas>
-  </div>
 
   <script src="scripts.js"></script>
+  <script>
+    let breakdownsShown = false;
+
+    function toggleBreakdowns() {
+      const allDetails = document.querySelectorAll('details');
+      breakdownsShown = !breakdownsShown;
+      allDetails.forEach(detail => {
+        detail.open = breakdownsShown;
+      });
+      document.getElementById('toggleBreakdownsBtn').textContent =
+        breakdownsShown ? 'Hide All Breakdowns' : 'Show All Breakdowns';
+    }
+  </script>
 
 </body>
 </html>

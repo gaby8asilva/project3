@@ -93,7 +93,7 @@ function drawChart(chartId, data, title) {
 
   const context = document.getElementById(chartId).getContext('2d');
   new Chart(context, {type: 'bar', data: { labels: labels, datasets: [{ label: 'Number of Outfits',
-        data: values, backgroundColor: 'blue' }]}, options: { plugins: { title: { display: true,
+        data: values, backgroundColor: '#612940' }]}, options: { plugins: { title: { display: true,
           text: title }, legend: { display: false } }, responsive: true, scales: { y: {
           beginAtZero: true, title: { display: true, text: 'Outfit Count' } } } } });
 }
